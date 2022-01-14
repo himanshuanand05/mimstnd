@@ -1,0 +1,27 @@
+<div class="container login-form-wrap">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
+        <div class="row mb-3 ">
+            <label for="username" class="col-sm-2 col-form-label">User ID</label>
+            <div class="col-sm-10">
+                <input formControlName="username" type="text" class="form-control" id="username"
+                placeholder="User ID">
+                <div *ngIf="f.username.errors && (submitted || f.username.touched)" class="invalid-control">
+                    <p class="text-danger">User ID is required.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password">
+                <div *ngIf="f.password.errors && (submitted || f.password.touched)" class="invalid-control">
+                    <p class="text-danger">Password is required.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <button type="submit" class="btn btn-primary col-sm-2">Login</button>
+        </div>
+    </form>
+</div>
+<p-toast></p-toast>

@@ -1,0 +1,120 @@
+<h3>Advanced Search Filter</h3>
+<div class="card">
+    <form [formGroup]="searchScheduleForm" (ngSubmit)="onSubmit()">
+        <div class="card-header">
+            <div class="form-group row">
+                <div class="col-md-2">
+                    <label>Schedule Name </label>
+                    <p-dropdown [options]="list" formControlName="scheduleName" optionLabel="Name"
+                        [filter]="true" filterBy="Name" [showClear]="true" (onChange)="clear($event,'domain')"
+                        placeholder="Select Plan Name" [style]="{'width':'100%'}">
+                    </p-dropdown>
+                </div>
+
+                <div class="col-md-2">
+                    <label>Status</label>
+                    <p-dropdown [options]="list" formControlName="status" optionLabel="Name"
+                     [filter]="true" filterBy="Name" [showClear]="true" (onChange)="clear($event,'domain')"
+                        placeholder="Select Status" [style]="{'width':'100%'}">
+                    </p-dropdown>
+                </div>
+
+                <div class="col-md-2">
+                    <label>Start Date</label>
+                    <p-calendar formControlName="startDate" inputStyleClass="form-control" placeholder="Enter Start Date" inputId="startDate"></p-calendar>
+                </div>
+
+                <div class="col-md-2">
+                    <label>End Date</label>
+                    <p-calendar formControlName="endDate" inputStyleClass="form-control" placeholder="Enter End Date" inputId="endDate"></p-calendar>
+                </div>
+
+                <div class="col-md-4">
+                    <label>&nbsp;</label>
+                    <div>
+                        <button class="btn btn-secondary mr-2" (click)="resetSearchForm()">Reset</button>&nbsp;
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Schedule Listing -->
+<p-card>
+    <h4>Schedule Training List</h4>
+    <p-table [value]="scheduleList" dataKey="SchedulePlanName" [paginator]="true" [rows]="appConstant.ROW_COUNT"
+    [rowsPerPageOptions]="appConstant.PAGE_SIZE_NO" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 5%"></th>
+                <th style="width: 20%">Schedule Name</th>
+                <th style="width: 13%">Sessions</th>
+                <th style="width: 12%">Status</th>
+                <th style="width: 15%">Start Date-Time</th>
+                <th style="width: 15%">End Date-Time</th>
+                <th style="width: 10%">Is Project</th>
+                <th style="width: 10%">Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-schedule let-expanded="expanded">
+            <tr>
+                <td style="width: 5%">
+                    <button type="button" pButton pRipple [pRowToggler]="schedule"
+                        class="p-button-text p-button-rounded p-button-plain"
+                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                </td>
+                <td style="width: 20%">{{schedule.SchedulePlanName}}</td>
+                <td style="width: 13%">{{schedule.SessionCount}}</td>
+                <td style="width: 12%">{{schedule.Status}}</td>
+                <td style="width: 15%">{{schedule.StartDateTime | date:'medium' }}</td>
+                <td style="width: 15%">{{schedule.EndDateTime | date:'medium'}}</td>
+                <td style="width: 10%">{{schedule.ProjectAlligned}}</td>
+
+                <td style="width: 10%">
+                    <span><a [routerLink]="['/schedule/update', schedule.id]"><i class="pi pi-pencil"></i></a></span>
+                    <span style="margin-left: 10px;"><a style="cursor: pointer; color: blue;" (click) = "removeSchedule()"><i class="pi pi-times"></i></a></span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-schedule>
+            <tr>
+                <td colspan="8">
+                    <div>
+                        <p-table [value]="schedule.SchedulePlanModel" dataKey="id">
+                            <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 15%; padding-left: 5%;">Session</th>
+                <th style="width: 12%;">Plan Name</th>
+                <th style="width: 10%;">Duration</th>
+                <th style="width: 15;">Start Datetime</th>
+                <th style="width: 15%;">End Datetime</th>
+                <th style="width: 10%;">Trainer</th>
+                <th style="width: 13%;">Participant count</th>
+                <th style="width: 10%;">Venue</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-schedule>
+            <tr>
+                <td style="padding-left: 5%;">{{schedule.SessionNo}}</td>
+                <td>
+                    <a [routerLink]="[ '/plan/update', 1 ]">{{schedule.PlanName}}</a>
+                    
+                </td>
+                <td style="width: 8%;">{{schedule.Duration}}</td>
+                <td>{{schedule.StartDateTime  | date:'medium'}}</td>
+                <td>{{schedule.EndDateTime  | date:'medium'}}</td>
+                <td>{{schedule.Trainer}}</td>
+                <td *ngFor="let particiapnt of schedule.Participant">{{schedule.ParticipantsCount}}</td>
+                <td>{{schedule.Venue}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    </div>
+    </td>
+    </tr>
+    </ng-template>
+    </p-table>
+</p-card>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

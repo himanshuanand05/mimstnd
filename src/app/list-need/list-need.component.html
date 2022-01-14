@@ -1,0 +1,51 @@
+
+<h3>Training Need List</h3>
+<p-card>
+    <div class="content-list-form">
+        <p-table styleClass="p-datatable-sm"  [resizableColumns]="true" [value]="trainingList" [paginator]="true" [rows]="rows"
+             [rowsPerPageOptions]="appConstant.PAGE_SIZE_NO">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:15%">Requested By</th>
+                    <th style="width:15%">Requested Date</th>
+                    <th style="width:12%">Decision Date</th>
+                    <th style="width:13%">Objective</th>
+                    <th style="width:10%">Expectation</th>
+                    <th style="width:10%">Projects</th>
+                    <th style="width:10%">Comments</th>
+                    <th style="width:10%">Status</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-training>
+                <tr>
+                    <td [pTooltip]="training.Plan">{{training.RequestedBy}}</td>
+                    <td [pTooltip]="training.SkillName">{{training.RequestedDate | date: 'dd/MM/yyyy'}}</td>
+                    <td [pTooltip]="training.TrainingModuleName">{{training.DecisionDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>
+                        <p class="subtopic">
+                            <a href="javascript:void(0)" [pTooltip]="training.Objective" tooltipPosition="top">
+                                {{training.Objective }}
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="subtopic">
+                            <a href="javascript:void(0)" [pTooltip]="training.Expectation" tooltipPosition="top">
+                                {{training.Expectation }}
+                            </a>
+                        </p>
+                    </td>
+                    <td>{{training.Projects }}</td>
+                    <td>{{training.Comments}}</td>
+                    <td>{{training.Status}}</td>
+                    <!-- <td> -->
+                        <!-- <p-button class="action-button" icon="pi pi-check" (onClick)="approve(training)"></p-button> -->
+                        <!-- <p-button class="action-button" icon="pi pi-times" (onClick)="approve(training)"></p-button> -->
+                    <!-- </td> -->
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</p-card>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

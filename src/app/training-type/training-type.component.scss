@@ -1,0 +1,16 @@
+.training-type-form {
+    margin: 30px;
+
+    .form-group {
+        margin: 10px;
+    }
+}
+
+
+::ng-deep .training-type-form .form-control .p-dropdown-label{
+    padding-top: 0px;
+}
+
+::ng-deep .training-type-form .form-control.p-dropdown{
+    padding: 0px;
+}

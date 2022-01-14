@@ -1,0 +1,20 @@
+.subtopic {
+    // width: 50%;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.action-button {
+    margin: 0 5px;
+}
+
+.adv-search {
+    display: flex;
+    gap:7px
+}
+
+.main-section {
+    margin-bottom: 30px;
+}

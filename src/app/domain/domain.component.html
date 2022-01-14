@@ -1,0 +1,34 @@
+<p-card [style]="{marginTop: '50px'}">
+  <div class="domain-form">
+    <form [formGroup]="domainForm" (ngSubmit)="onSubmit()">
+      <!-- <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Training Content Name</label>
+        <div class="col-sm-8">
+          {{trainingService.contentCreationData.TrainingContentName}}
+        </div>
+      </div> -->
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Domains/Functional</label>
+        <div class="col-sm-7">
+          <p-dropdown styleClass="form-control" formControlName="domainId" [options]="domainList"
+            placeholder="Select a Domain" optionLabel="Name" optionValue="Id" [showClear]="true"
+            (onChange)="clear($event,'domain')">
+          </p-dropdown>
+        </div>
+        <div class="col-sm-1"><a href="javascript:void(0)" (click)="addRecord($event, 'trainingType')"><i
+              class="pi pi-plus"></i></a></div>
+        <div class="col-sm-1" *ngIf="domainForm.valid"><a href="javascript:void(0)"
+            (click)="editRecord($event, 'domain')"><i class="pi pi-pencil"></i></a></div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-8">
+          <a style="margin-right: 10px;" type="submit" class="btn btn-primary" (click)="back()">Back</a>
+          <button type="submit" [disabled]="domainForm.invalid" class="btn btn-primary">Save & Next</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</p-card>
+<p-toast></p-toast>

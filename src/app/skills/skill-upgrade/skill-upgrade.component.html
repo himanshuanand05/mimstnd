@@ -1,0 +1,39 @@
+<h2>Skill Upgrade</h2>
+<p-card>
+    <div class="plan-form">
+        <form [formGroup]="skillUpgradeForm" (ngSubmit)="submit()">
+            <!-- <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Employee Name *</label>
+                <div class="col-sm-8">
+                    <p-dropdown styleClass="form-control" formControlName="employee" placeholder="Select Employee" [options]="employeeList"
+                    optionValue="Id" optionLabel="Name" [showClear]="true"></p-dropdown>
+                    <div *ngIf="f.employee.errors && f.employee.touched" class="invalid-control">
+                        <p class="text-danger">Employee is required.</p>
+                    </div>
+                </div>
+            </div> -->
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Skills *</label>
+                <div class="col-sm-8 col-form-label">
+                    <p-dropdown styleClass="form-control" formControlName="skill" placeholder="Select Skill" [options]="skillsList"
+                    optionValue="Id" optionLabel="Name" [showClear]="true"></p-dropdown>
+                    <div *ngIf="f.skill.errors && f.skill.touched" class="invalid-control">
+                        <p class="text-danger">Skills is required.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Level</label>
+                <div class="col-sm-8 col-form-label">
+                    Advance
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-8">
+                    <button type="submit" [disabled]="skillUpgradeForm.invalid" class="btn bt-sm btn-success">Upgrade</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</p-card>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

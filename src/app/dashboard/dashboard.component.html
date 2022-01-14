@@ -1,0 +1,168 @@
+<h4 class="screen-title">Welcome to Dashboard</h4>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="today-training">
+      <h5>Today's Training</h5>
+      <p-table styleClass="p-datatable-sm">
+            <ng-template pTemplate="header">
+                <tr>
+                  <th>Employee Name</th>
+                  <th>Training Schedule Name - Plan Name</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-content>
+
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="evaluation">
+      <h5>Evaluation Status</h5>
+      <p-table styleClass="p-datatable-sm">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Employee Name</th>
+            <th>Training Schedule Name - Plan Name</th>
+            <th>Status</th>
+        </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-content>
+
+        </ng-template>
+    </p-table>
+    </div>
+
+    <div class="approval">
+      <h5>Pending Approval</h5>
+      <p-table styleClass="p-datatable-sm" [value]="approval">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Name</th>
+            <th>Count</th>
+        </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-approv>
+          <tr>
+            <td>{{approv.title}}</td>
+            <td>{{approv.count}}</td>
+          </tr>
+        </ng-template>
+    </p-table>
+    </div>
+  </div>
+    <div class="col-md-6 pt-3 px-3 text-center overflow-hidden"  style="margin-bottom: 50px; box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
+      <div class="my-3 p-3">
+        <div>
+          <p style="float: right;">
+            <!-- <span class="view-lable">Trainer's View</span> -->
+            <p-selectButton [options]="stateOptions" [(ngModel)]="value1" optionLabel="label" optionValue="value" (onChange)="onChangeTrainer($event)"></p-selectButton>
+            <!-- <p-inputSwitch (onChange)="onChangeTrainer($event)"></p-inputSwitch> -->
+          </p>
+          <h4 class="display-5">Calender</h4>
+        </div>
+       
+        <div class="label-button" style="display: flex;margin: 20px 0;">
+          <button pButton pRipple type="button" label="Submitted" class="p-button-rounded"></button>
+          <button pButton pRipple type="button" label="Approved" class="p-button-rounded p-button-help"></button>
+          <button pButton pRipple type="button" label="Started" class="p-button-rounded p-button-success"></button>
+          <button pButton pRipple type="button" label="Completed" class="p-button-rounded p-button-info"></button>
+          <button pButton pRipple type="button" label="Scheduled" class="p-button-rounded p-button-warning"></button>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-4">
+            <div class="btn-group">
+              <div
+                class="btn btn-primary"
+                mwlCalendarPreviousView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenMonthViewDay()"
+              >
+                Previous
+              </div>
+              <div
+                class="btn btn-outline-secondary"
+                mwlCalendarToday
+                [(viewDate)]="viewDate"
+              >
+                Today
+              </div>
+              <div
+                class="btn btn-primary"
+                mwlCalendarNextView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenMonthViewDay()"
+              >
+                Next
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h3>{{ viewDate | date: 'mediumDate' }}</h3>
+          </div>
+          <div class="col-md-4">
+            <div class="btn-group">
+              <div
+                class="btn btn-primary"
+                (click)="setView(CalendarView.Month)"
+                [class.active]="view === CalendarView.Month"
+              >
+                Month
+              </div>
+              <div
+                class="btn btn-primary"
+                (click)="setView(CalendarView.Week)"
+                [class.active]="view === CalendarView.Week"
+              >
+                Week
+              </div>
+              <div
+                class="btn btn-primary"
+                (click)="setView(CalendarView.Day)"
+                [class.active]="view === CalendarView.Day"
+              >
+                Day
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div [ngSwitch]="view">
+          <mwl-calendar-month-view
+            *ngSwitchCase="CalendarView.Month"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            [activeDayIsOpen]="activeDayIsOpen"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+          >
+          </mwl-calendar-month-view>
+          <mwl-calendar-week-view
+            *ngSwitchCase="CalendarView.Week"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+          >
+          </mwl-calendar-week-view>
+          <mwl-calendar-day-view
+            *ngSwitchCase="CalendarView.Day"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+          >
+          </mwl-calendar-day-view>
+        </div>
+      </div>
+    </div>
+  </div>

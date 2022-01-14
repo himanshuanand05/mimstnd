@@ -1,0 +1,27 @@
+.main-step-value {
+    font-weight: bold;
+    margin-top: 30px;
+    span {
+        width: 14%;
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+::ng-deep .main-breadcrumb {
+    .p-card-body {
+        padding: 0;
+        // background-color: #efefef;
+        .p-card-content {
+            padding-left: 17px;
+            margin-top: 20px;
+            padding-bottom: 1px;
+            padding-top: 12px;  
+            font-weight: bold;
+        }
+    }
+}
+
+.breadcrumb > li + li:before {
+    content: "";
+}

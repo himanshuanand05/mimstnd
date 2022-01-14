@@ -1,0 +1,72 @@
+<p-card>
+    <div class="plan-form">
+        <h2>Training Feedback</h2>
+        <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Training Schedule</label>
+                <div class="col-sm-8">
+                    <p-dropdown formControlName="scheduleId" styleClass="form-control" [options]="scheduleList" placeholder="Select Training Schedule"
+                        optionLabel="Name" optionValue="Id" [showClear]="true"></p-dropdown>
+                    <div *ngIf="f.scheduleId.errors &&  f.scheduleId.touched" class="invalid-control">
+                        <div class="text-danger">Training Schedule is required.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <p class="agreement">Please rate your level of agreement with each of follwoing statements,
+                     keeping in mind 5 is the highest level of agreement.</p>
+            </div>
+
+            <p-panel [style]="{margin: '10px 0'}">
+                <ng-template pTemplate="header">
+                    Course
+                </ng-template>
+
+                <div formArrayName="feedbackRating">
+                    <ul>
+                        <li *ngFor="let feedback of feedbackRatingFa.controls; let i = index;">
+                            <div [formGroupName]="i" class="row">
+                                <div class="col-sm-8"><span>{{feedback.value.Title}}</span></div>
+                                <div class="col-sm-4"><p-rating formControlName="Score" [cancel]="false"></p-rating></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div *ngIf="f.feedbackRating.invalid &&  f.feedbackRating.touched" class="invalid-control">
+                    <div class="text-warning">All statements are required.</div>
+                </div>
+               
+            </p-panel>
+
+            <p-panel [style]="{margin: '10px 0'}">
+                <ng-template pTemplate="header">
+                    Your Suggestions
+                </ng-template>
+                <div formArrayName="feedbackSuggestion">
+                <ul>
+                    <li *ngFor="let suggestion of feedbackSuggestionFa.controls; let i = index;">
+                        <div [formGroupName]="i" class="row">
+                            <div class="col-sm-7">
+                                <span>{{suggestion.value.Title}}</span>
+                            </div>
+                            <div class="col-sm-5">
+                                <span><textarea class="suggestion" formControlName="Suggestion"></textarea></span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                </div>
+            </p-panel>
+
+            <div class="form-group row">
+                <div class="col-sm-8">
+                    <button type="button" class="btn btn-primary cancel-btn">Cancel</button>
+                    <button type="submit" [disabled]="feedbackForm.invalid" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</p-card>

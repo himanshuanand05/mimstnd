@@ -1,0 +1,19 @@
+.domain-form {
+    margin: 30px;
+
+    .form-group {
+        margin: 10px;
+
+        .col-form-label{
+            padding-top: 0px !important;
+        }
+    }
+}
+
+::ng-deep .domain-form .form-control .p-dropdown-label{
+    padding-top: 0px;
+}
+
+::ng-deep .domain-form .form-control.p-dropdown{
+    padding: 0px;
+}

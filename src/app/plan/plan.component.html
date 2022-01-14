@@ -1,0 +1,117 @@
+<p-card>
+    <div class="plan-form">
+        <h2>Training Plan</h2>
+        <form [formGroup]="addPlanForm" (ngSubmit)="submit()">
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">
+                    Training Plan Name</label>
+                <div class="col-sm-8">
+                    <input class="form-control" formControlName="trainingPlanName" type="text" name="trainingPlanName"
+                        id="">
+                    <div *ngIf="addPlanForm.controls['trainingPlanName'].invalid && (addPlanForm.controls['trainingPlanName'].dirty || addPlanForm.controls['trainingPlanName'].touched)"
+                        class="alert">
+                        <div *ngIf="addPlanForm.controls['trainingPlanName'].errors" class="invalid">
+                            Please enter a valid Training Plan Name
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Training Type *</label>
+                <div class="col-sm-8">
+                    <p-dropdown styleClass="form-control" (ngModelChange)="getDomains($event)"
+                        formControlName="trainingType" placeholder="Select a Project" [options]="trainingTypeList"
+                        optionValue="Id" optionLabel="Name"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Project Name</label>
+                <div class="col-sm-8">
+                    <p-dropdown styleClass="form-control" formControlName="projectName" placeholder="Select a Project"
+                        optionLabel="Name" optionValue="Id" [options]="projectList">
+                    </p-dropdown>
+                </div>
+            </div>
+
+            <!-- <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Training Content Name</label>
+                <div class="col-sm-8">
+                    <p-multiSelect styleClass="form-control" (onChange)="populateLeaves('contentName')" formControlName="trainingContentName" defaultLabel="Select"
+                        display="chip" [options]="trainingContentName" optionValue="id" optionLabel="name"></p-multiSelect>
+                </div>
+                <div *ngIf="addPlanForm.controls['trainingContentName'].invalid && (addPlanForm.controls['trainingContentName'].dirty || addPlanForm.controls['trainingContentName'].touched)" class="alert">
+                    <div *ngIf="addPlanForm.controls['trainingContentName'].errors" class="invalid">
+                    Please enter a valid Training Content Name
+                </div>
+                </div>
+            </div> -->
+
+
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Domain *</label>
+                <div class="col-sm-8">
+
+                    <p-dropdown styleClass="form-control" (ngModelChange)="getSkill($event,'skill')"
+                        formControlName="domain" placeholder="Select Domain" display="chip" [options]="domainList"
+                        optionValue="Id" optionLabel="Name"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Skill *</label>
+                <div class="col-sm-8">
+                    <p-dropdown styleClass="form-control" (onChange)="getModule_Topic_SubTopic($event.value)"
+                        formControlName="skill" placeholder="Select Skill" display="chip" [options]="skillList"
+                        optionValue="Id" optionLabel="Name"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Module</label>
+                <div class="col-sm-8">
+                    <p-multiSelect styleClass="form-control" (onChange)="getTopic_SubTopic($event.value)"
+                        formControlName="module" defaultLabel="Select" display="chip" [options]="moduleList"
+                        optionValue="Id" optionLabel="Name"></p-multiSelect>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Topic</label>
+                <div class="col-sm-8">
+                    <p-multiSelect styleClass="form-control" (onChange)="getSubTopic($event.value)"
+                        formControlName="topic" defaultLabel="Select" display="chip" [options]="topicList"
+                        optionValue="Id" optionLabel="Name"></p-multiSelect>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Sub Topic</label>
+                <div class="col-sm-8">
+                    <p-multiSelect styleClass="form-control" (onChange)="populateLeaves('subTopic')"
+                        formControlName="subTopic" defaultLabel="Select" selectedItemsLabel="{0} Sub Topics selected" [options]="subTopicList"
+                        optionValue="Id" optionLabel="Name"></p-multiSelect>
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="subTopicList">
+                <label class="col-sm-2 col-form-label">Duration (in mins)</label>
+                <div class="col-sm-8" >
+                    {{TotalDuration ? TotalDuration : '-'}}-({{!TotalDuration ? '-' : TotalDuration | minToHours }})
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-8">
+                    <button type="button" class="btn btn-primary cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="addPlanForm.invalid">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</p-card>

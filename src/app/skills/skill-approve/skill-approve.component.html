@@ -1,0 +1,64 @@
+<h3>Advanced Search Filter</h3>
+<div class="card" style="margin-bottom: 30px;">
+    <form [formGroup]="skillSearchForm" (ngSubmit)="onSubmit()">
+        <div class="card-header">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label text-center">Employee</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="employee" formControlName="employee">
+                </div>
+                <div class="offset-4 col-md-2">
+                    <button class="btn btn-secondary mr-2" (click)="resetSearchForm()">Reset</button>&nbsp;
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<h3>Skill Approve</h3>
+<p-card [style]="{marginTop: '20px'}">
+    <div class="form-group row">
+        <div class="row">
+            <div class="col-sm-12">
+                <p-table styleClass="p-datatable-sm" [value]="userList" responsiveLayout="scroll" [paginator]="true"
+                    [rows]="appConstant.ROW_COUNT" [rowsPerPageOptions]="appConstant.PAGE_SIZE_NO">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Employee</th>
+                            <th>Skill</th>
+                            <th>Current Skill</th>
+                            <th>Applied Skill</th>
+                            <th>Rating</th>
+                            <th>Feedback</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-user>
+                        <tr>
+                            <td>{{user.Employee}}</td>
+                            <td>{{user.Skill}}</td>
+                            <td>{{user.CurrentSkill}}</td>
+                            <td>{{user.AppliedSkill}}</td>
+                            <td>
+                                <p-dropdown styleClass="form-control" (onChange)="onRatingChange(user)"
+                                    [(ngModel)]="user.Rating" placeholder="Select Rating" [options]="ratingList"
+                                    optionValue="Title" optionLabel="Title"></p-dropdown>
+                            </td>
+                            <td style="width: 30%;">
+                                <textarea [(ngModel)]="user.Feedback" type="text"
+                                    name="Feedback" class="form-control" id=""></textarea>
+                            </td>
+                            <td>
+                                <p-button icon="pi pi-check" *ngIf="user.Rating >= 3" (onClick)="approve(user)"></p-button>
+                                <p-button icon="pi pi-times" *ngIf="user.Rating < 3" (onClick)="reject(user)"></p-button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</p-card>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

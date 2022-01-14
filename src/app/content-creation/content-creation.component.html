@@ -1,0 +1,15 @@
+<p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="true"></p-steps>
+
+
+<p-card styleClass="main-breadcrumb" *ngIf="getContentSelectedData().length > 0">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" *ngFor="let stepValue of stepsLableValue; let i = index"> 
+              <span *ngIf="i > 0"><i class="pi pi-angle-double-right"></i></span>
+                {{stepValue}}
+            </li>
+        </ol>
+      </nav>
+</p-card>
+
+<router-outlet></router-outlet>

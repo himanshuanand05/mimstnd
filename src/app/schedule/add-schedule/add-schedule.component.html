@@ -1,0 +1,132 @@
+<p-card>
+    <div class="plan-form">
+        <h2>Create Schedule</h2>
+        <form [formGroup]="addScheduleForm" (ngSubmit)="onSubmit()" class="">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Schedule Name</label>
+                <div class="col-sm-8">
+                    <input class="form-control" formControlName="name" type="text" name="" id=""
+                        placeholder="Enter Schedule Name">
+                </div>
+                <div class="col-sm-2">
+                    <a href="javascript:void(0)" class="btn btn-success btn-sm add-session"
+                        (click)="addSessionSection()" title="Add Session">
+                        Add Session
+                    </a>
+                </div>
+            </div>
+            <div formArrayName="sessions">
+                <p-card [style]="{margin: '10px'}" *ngFor="let session of sessions.controls; let i = index">
+                    <div [formGroupName]="i">
+                        <div *ngIf="sessions.controls.length > 1" class="form-group row">
+                            <a class="remove-session" href="javascript:void(0)" (click)="removeSessionSection(i)"
+                                title="Remove Session">
+                                <i class="pi pi-times"></i>
+                            </a>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Session</label>
+                            <div class="col-sm-8">
+                                {{i+1}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Plan *</label>
+                            <div class="col-sm-8">
+                                <p-dropdown formControlName="planId" styleClass="form-control" [options]="planList"
+                                    placeholder="Select Plan" (onChange)="getValue($event.value,i)"
+                                    optionLabel="TrainingPlanName" optionValue="TrainingPlanId" [showClear]="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Duration (in mins)</label>
+                            <div class="col-sm-8">
+                                {{!planDuration ? '--'  : planDuration | minToHours }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Start DateTime *</label>
+                            <div class="col-sm-8">
+                                <p-calendar formControlName="startDatetime" (click)="setEndDateTime()" 
+                                    inputStyleClass="form-control" placeholder="Enter Start Datetime" [showTime]="true"
+                                    inputId="starttime"></p-calendar>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">End DateTime *</label>
+                            <div class="col-sm-8">
+                                <p-calendar formControlName="endDatetime" [minDate]="endDateTime"
+                                    (click)="setEvaluationDate()" inputStyleClass="form-control"
+                                    placeholder="Enter End Datetime" [showTime]="true" inputId="endtime"></p-calendar>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Trainer *</label>
+                            <div class="col-sm-8">
+                                <p-dropdown formControlName="trainerId" styleClass="form-control"
+                                    [options]="trainerList[i]" placeholder="Select Trainer" optionLabel="EmployeeName"
+                                    (onChange)="getParcipantsOtherthanTrainer($event.value,i)" optionValue="EmployeeId"
+                                    [showClear]="true">
+                                </p-dropdown>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="checkbox" [disabled]="!trainerCheckboxList[i]" #trainer
+                                    [checked]="trainerCheckboxList[i]" (change)="changeTrainerValues(trainer.checked,i)"> Exclusive
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Participants</label>
+                            <div class="col-sm-8">
+                                <p-multiSelect formControlName="participants" styleClass="form-control"
+                                    defaultLabel="Select Participants" [options]="participantsList[i]"
+                                    optionValue="EmployeeId" optionLabel="EmployeeName">
+                                </p-multiSelect>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="checkbox" [disabled]="!participantCheckboxList[i]" 
+                                    #participants [checked]="participantCheckboxList[i]"
+                                    (change)="changeParticipantValues(participants.checked,i)"> Exclusive
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Venue</label>
+                            <div class="col-sm-8">
+                                <p-dropdown formControlName="venueTypeId" styleClass="form-control"
+                                    [options]="venueList" placeholder="Select Venue" optionLabel="Name" optionValue="Id"
+                                    [showClear]="true"></p-dropdown>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Evaluators *</label>
+                            <div class="col-sm-8">
+                                <p-multiSelect formControlName="evaluators" styleClass="form-control"
+                                    defaultLabel="Select Evaluators" [options]="evaluatorsList[i]" optionValue="EmployeeId"
+                                    optionLabel="EmployeeName">
+                                </p-multiSelect>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Evaluation Date*</label>
+                            <div class="col-sm-8">
+                                <p-calendar formControlName="evaluationDate" [minDate]="evaluationdateValidation"
+                                    inputStyleClass="form-control" placeholder="Enter Evaluation Date"
+                                    inputId="evaluationDate"></p-calendar>
+                            </div>
+                        </div>
+                    </div>
+                </p-card>
+            </div>
+
+            <div *ngIf="sessions.controls.length > 0" class="form-group row">
+                <div class="col-sm-8">
+                    <button type="button" class="btn btn-primary cancel-btn">Cancel</button>
+                    <button type="submit" [disabled]="addScheduleForm.invalid" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</p-card>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

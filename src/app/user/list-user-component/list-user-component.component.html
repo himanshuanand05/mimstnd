@@ -1,0 +1,153 @@
+<h3>Advanced Search Filter</h3>
+<div class="card" style="margin-bottom: 30px;">
+    <form [formGroup]="userSearchForm" (ngSubmit)="onSubmit()">
+        <div class="card-header">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label text-end">Employee</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="employee" formControlName="employee">
+                </div>
+                <label class="col-sm-2 col-form-label text-end">Status</label>
+                <div class="col-sm-3">
+                    <p-dropdown formControlName="status" optionLabel="Name" placeholder="Select Status"></p-dropdown>
+                </div>
+
+                <div class="col-md-2">
+                    <button class="btn btn-secondary mr-2" (click)="resetSearchForm()">Reset</button>&nbsp;
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<h3>User List</h3>
+<p-card [style]="{marginTop: '20px'}">
+    <div class="form-group row">
+        <p-accordion [multiple]="true">
+            <p-accordionTab header="Manager" class="">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p-table styleClass="p-datatable-sm" [value]="userList" responsiveLayout="scroll"
+                            [paginator]="true" [rows]="appConstant.ROW_COUNT"
+                            [rowsPerPageOptions]="appConstant.PAGE_SIZE_NO">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Project</th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-user>
+                                <tr>
+                                    <td>{{user.Employee}}</td>
+                                    <td>{{user.Project}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+
+
+    <div class="form-group row">
+        <p-accordion [multiple]="true">
+            <p-accordionTab header="TPO" class="">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p-table styleClass="p-datatable-sm" [value]="tpoList" responsiveLayout="scroll"
+                            [paginator]="true" [rows]="appConstant.ROW_COUNT"
+                            [rowsPerPageOptions]="appConstant.PAGE_SIZE_NO">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Employee</th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-user>
+                                <tr>
+                                    <td>{{user.Employee}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+
+    <div class="form-group row">
+        <p-accordion [multiple]="true">
+            <p-accordionTab header="SPOC" class="">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p-table styleClass="p-datatable-sm" [value]="userList" responsiveLayout="scroll"
+                            [paginator]="true" [rows]="appConstant.ROW_COUNT"
+                            [rowsPerPageOptions]="appConstant.PAGE_SIZE_NO">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Project</th>
+                                    <th>Project Manager</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-user>
+                                <tr>
+                                    <td>{{user.Employee}}</td>
+                                    <td>{{user.Project}}</td>
+                                    <td>{{user.ProjectManager}}</td>
+                                    <td><p-inputSwitch [(ngModel)]="user.Status"></p-inputSwitch></td>
+                                    <td>
+                                        <a [routerLink]="['/user/role']"><i class="pi pi-pencil"></i></a>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+
+    <div class="form-group row">
+        <p-accordion [multiple]="true">
+            <p-accordionTab header="Trainer" class="">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p-table styleClass="p-datatable-sm" [value]="userList" responsiveLayout="scroll"
+                            [paginator]="true" [rows]="appConstant.ROW_COUNT"
+                            [rowsPerPageOptions]="appConstant.PAGE_SIZE_NO">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Skill</th>
+                                    <th>Project Manager</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-user>
+                                <tr>
+                                    <td>{{user.Employee}}</td>
+                                    <td>{{user.Skill}}</td>
+                                    <td>{{user.ProjectManager}}</td>
+                                    <td><p-inputSwitch [(ngModel)]="user.Status"></p-inputSwitch></td>
+                                    <td>
+                                        <a [routerLink]="['/user/role']"><i class="pi pi-pencil"></i></a>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+
+</p-card>

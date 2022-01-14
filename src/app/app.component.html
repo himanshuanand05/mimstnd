@@ -1,0 +1,16 @@
+<app-header></app-header>
+
+<a href="javascript:void(0)" *ngIf="notLoggedIn" class="sidenav-action" (click)="display = !display"><i class="pi pi-list" ></i></a>
+<div id="main" class="row fullheight">
+  <div *ngIf="display" class="col-sm-2 sidenav-item">
+    <p-panelMenu [model]="sidebarMenuItems" [transitionOptions]="'0ms'"></p-panelMenu>
+  </div>
+  <div class="main-container" [ngClass]=" !display ? 'col-sm-12' : 'fit-width'">
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <p-toast></p-toast>  
+</div>
+
+<app-footer></app-footer>

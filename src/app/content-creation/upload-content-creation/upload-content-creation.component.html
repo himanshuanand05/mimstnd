@@ -1,0 +1,8 @@
+<div class="download-template">
+    <a class="" href="javascript:void(0)" (click)="downloadTemplate()">Download Template </a>
+</div>
+<p-card [style]="{marginTop: '50px'}">
+    <h4>Upload Content Data</h4>
+    <input #csvFileEle type="file" accept=".csv" class="upload" (change)="fileChanges($event)">
+    <button [disabled]="!contentCsvData" class="btn btn-primary" (click)="uploadContentData()">Upload</button>
+</p-card>

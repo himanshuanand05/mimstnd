@@ -1,0 +1,98 @@
+<h3>Advanced Search Filter</h3>
+<div class="card main-section">
+    <form [formGroup]="searchApplyTrainingForm" (ngSubmit)="onSubmit()">
+        <div class="card-header">
+            <div class="form-group adv-search">
+                <div class="col-md-2">
+                    <label>Plan </label>
+                    <p-dropdown [options]="list" formControlName="planName" optionLabel="Name"
+                        [filter]="true" filterBy="Name" [showClear]="true" placeholder="Select Plan" [style]="{'width':'100%'}">
+                    </p-dropdown>
+                </div>
+
+                <div class="col-md-2">
+                    <label>Skill</label>
+                    <p-dropdown [options]="list" formControlName="skill" optionLabel="Name"
+                     [filter]="true" filterBy="Name" [showClear]="true" placeholder="Select Skill" [style]="{'width':'100%'}">
+                    </p-dropdown>
+                </div>
+
+                <div class="col-md-2">
+                    <label>Start Date</label>
+                    <p-calendar formControlName="startDate" inputStyleClass="form-control" placeholder="Enter Start Date" inputId="startDate"></p-calendar>
+                </div>
+
+                <div class="col-md-2">
+                    <label>End Date</label>
+                    <p-calendar formControlName="endDate" inputStyleClass="form-control" placeholder="Enter End Date" inputId="endDate"></p-calendar>
+                </div>
+                <div class="col-md-2">
+                    <label>Trainer</label>
+                    <p-dropdown [options]="list" formControlName="trainer" optionLabel="Name"
+                     [filter]="true" filterBy="Name" [showClear]="true" placeholder="Select Trainer" [style]="{'width':'100%'}">
+                    </p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label>&nbsp;</label>
+                    <div>
+                        <button class="btn btn-secondary mr-2" (click)="resetSearchForm()">Reset</button>&nbsp;
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Apply Training Listing -->
+<h3>Apply Training List</h3>
+<p-card>
+    <div class="content-list-form">
+        <p-table styleClass="p-datatable-sm"  [resizableColumns]="true" [value]="trainingList" [paginator]="true" [rows]="rows"
+             [rowsPerPageOptions]="appConstant.PAGE_SIZE_NO">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:15%">Plan</th>
+                    <th style="width:10%">Skill</th>
+                    <th style="width:10%">Module</th>
+                    <th style="width:10%">Topic</th>
+                    <th style="width:15%;">Sub Topic</th>
+                    <th style="width:10%">Start Datetime</th>
+                    <th style="width:10%">End Datetime</th>
+                    <th style="width:10%">Trainer</th>
+                    <th style="width:10%">Action</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-training>
+                <tr>
+                    <td [pTooltip]="training.Plan">{{training.Plan}}</td>
+                    <td [pTooltip]="training.SkillName">{{training.SkillName}}</td>
+                    <td [pTooltip]="training.TrainingModuleName">{{training.TrainingModuleName}}</td>
+                    <td>
+                        <p class="subtopic">
+                            <a href="javascript:void(0)" [pTooltip]="training.ModuleTopicName" tooltipPosition="top">
+                                {{training.ModuleTopicName }}
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="subtopic">
+                            <a href="javascript:void(0)" [pTooltip]="training.ModuleSubTopicName" tooltipPosition="top">
+                                {{training.ModuleSubTopicName }}
+                            </a>
+                        </p>
+                    </td>
+                    <td>{{training.StartDatetime | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{training.EndDatetime | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{training.Trainer}}</td>
+                    <td>
+                        <p-button class="action-button" icon="pi pi-check" (onClick)="approve(training)"></p-button>
+                        <!-- <p-button class="action-button" icon="pi pi-times" (onClick)="approve(training)"></p-button> -->
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</p-card>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="main-body">
+    
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                      <h4>John Doe</h4>
+                      <p class="text-secondary mb-1">Full Stack Developer</p>
+                      <p class="text-secondary mb-1">BU Head</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="card mt-3">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">LinkedIn</h6>
+                    <span class="text-secondary">https://www.linkedin.com/</span>
+                  </li>
+                </ul>
+              </div> -->
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Role</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      SPOC
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      fip@jukmuh.al
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Mobile</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      (320) 380-4539
+                    </div>
+                  </div>
+                  <!-- <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Address</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      Bay Area, San Francisco, CA
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="row gutters-sm">
+                <div class="col-sm-12 mb-6">
+                  <p-card [style]="{marginTop: '20px'}">
+                    <div class="form-group row">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p-table styleClass="p-datatable-sm" [value]="userList" responsiveLayout="scroll">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th>Skill</th>
+                                            <th>Skill Level</th>
+                                            <th>Is Trainer</th>
+                                        </tr>
+                                    </ng-template>
+                
+                                    <ng-template pTemplate="body" let-user>
+                                        <tr>
+                                            <td>{{user.Skill}}</td>
+                                            <td>{{user.SkillLevel}}</td>
+                                            <td>{{user.IsTrainer}}</td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                </p-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>

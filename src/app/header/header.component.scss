@@ -1,0 +1,39 @@
+@import '../../styles.scss';
+#header {
+    // display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary-color;
+    color: #fff;
+    height: 50px;
+}
+
+::ng-deep{
+    .p-menubar {
+        .p-menubar-root-list .p-menuitem .p-menuitem-link:focus {
+            box-shadow: none;
+        }
+
+        .p-submenu-list .p-menu-separator{
+            margin: 0;
+        }
+
+        .p-submenu-list{
+            padding: 10;
+        }
+
+        // .p-menubar-root-list .p-menuitem .p-menuitem-link .p-menuitem-text{
+        //     color:white
+        // }
+
+        .p-menubar-root-list .p-menuitem.p-menuitem-active .p-menuitem-link:not(.p-disabled):hover .p-menuitem-text {
+            color: white;
+        }
+    }
+
+    .user-nav div {
+        background-color: $primary-color;
+        padding: 0;
+    }
+
+}

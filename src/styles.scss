@@ -1,0 +1,66 @@
+$primary-color: #4074B8;
+
+html, body {
+    min-height: 100% !important;
+    height: 100%;
+    
+    .fullheight {
+        min-height: 88%;
+    }
+}
+
+
+.skip-btn {
+    margin-left: 15px;
+}
+
+.p-menuitem-link-active {
+    background-color: #4074B8 !important;
+} 
+
+
+.form-control .p-dropdown-label{
+    padding-top: 0px;
+}
+
+.form-control.p-dropdown{
+    padding: 0px;
+}
+
+.form-control .p-multiselect-label{
+    padding-top: 0px;
+}
+
+.form-control.p-multiselect{
+    padding: 0px;
+}
+
+p-calendar span.p-calendar{
+    width: 100% !important;
+    .p-datepicker.p-component {
+        min-width: 0 !important;
+    }
+}
+
+.mrV-15 {
+    margin-right: 15px;
+}
+
+.user-menu .p-menuitem-link .p-menuitem-text,.p-submenu-icon {
+    color: white !important;
+}
+
+p-button[icon='pi pi-check'] button  {
+    background-color: #008000 !important;
+}
+
+p-button[icon='pi pi-times'] button { 
+    background-color: #ff0000;
+}
+
+p-menubarsub ul li {
+    background-color: $primary-color !important;
+}
+.p-menubar .p-menuitem.p-menuitem-active > .p-menuitem-link {
+    background-color: #1e3758 !important;
+}

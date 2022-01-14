@@ -1,0 +1,38 @@
+@import '../../styles.scss';
+.table-title {
+    text-align: left;
+    padding-left: 7px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+::ng-deep .p-datatable-table .p-datatable-thead th {
+    background-color: #68819b !important;
+}
+
+::ng-deep .p-datatable-table th, td {
+    border: 1px solid #dadada !important;
+}
+
+.label-button {
+    button {
+        margin: 0 5px;
+    }
+    button:hover {
+       cursor: pointer;
+    }
+}
+
+.today-training, .evaluation, .approval {
+    margin: 20px 10px;
+}
+
+.view-lable {
+    padding-right: 10px;
+    position: relative;
+    bottom: 9px;
+}
+
+::ng-deep .p-selectbutton .p-button.p-highlight {
+    background-color: $primary-color !important;
+}

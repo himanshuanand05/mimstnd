@@ -1,0 +1,106 @@
+<h2>Training Evaluation</h2>
+<p-card>
+    <div class="plan-form">
+        <form [formGroup]="evaluationForm" (ngSubmit)="onSubmit()" class="">
+            <div class="form-group m-2">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 col-form-label">Training Schedule</label>
+                        <div class="col-sm-8 form-check-inline">
+                            <p-dropdown formControlName="scheduleId" styleClass="form-control" [options]="scheduleList"
+                                placeholder="Select Training Schedule" optionLabel="Name" optionValue="Id"
+                                [showClear]="true">
+                            </p-dropdown>
+                            <div *ngIf="f.scheduleId.errors &&  f.scheduleId.touched" class="invalid-control">
+                                <div class="text-danger">Training Schedule is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 col-form-label">Evaluation Date</label>
+                        <div class="col-sm-8 form-check-inline">
+                           <p>{{ selectedSchedule.EvaluationDate | date }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group m-2">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 col-form-label">Session</label>
+                        <div class="col-sm-8 form-check-inline">
+                            <p-dropdown formControlName="session" styleClass="form-control" [options]="selectedSchedule.sessions"
+                                placeholder="Select Session" optionLabel="Name" optionValue="SessionNmber"
+                                [showClear]="true">
+                            </p-dropdown>
+                            <div *ngIf="f.session.errors &&  f.session.touched" class="invalid-control">
+                                <div class="text-danger">Session is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 col-form-label">Participant</label>
+                        <div class="col-sm-8 form-check-inline">
+                            <p-dropdown formControlName="participant" styleClass="form-control" [options]="participantList"
+                                placeholder="Select Participant" optionLabel="Name" optionValue="Id"
+                                [showClear]="true">
+                            </p-dropdown>
+                            <div *ngIf="f.participant.errors &&  f.participant.touched" class="invalid-control">
+                                <div class="text-danger">Participant is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p-card [style]="{margin: '10px 0'}">
+
+                <div formArrayName="feedbackRating">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Skill</th>
+                                <th>Module</th>
+                                <th>Topic</th>
+                                <th>Sub Topic</th>
+                                <th>Rating</th>
+                                <th>Feedback</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let feedback of feedbackRatingFa.controls; let i = index;" [formGroupName]="i">
+                                <td>{{feedback.value.Skill}}</td>
+                                <td>{{feedback.value.Module}}</td>
+                                <td>{{feedback.value.Topic}}</td>
+                                <td>{{feedback.value.SubTopic}}</td>
+                                <td>
+                                    <p-rating formControlName="Score" [cancel]="false"></p-rating>
+                                </td>
+                                <td>
+                                    <textarea class="suggestion" formControlName="Suggestion"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="f.feedbackRating.invalid &&  f.feedbackRating.touched" class="invalid-control">
+                        <div class="text-warning">All rating are required.</div>
+                    </div>
+                </div>
+
+
+
+            </p-card>
+            <div class="form-group row">
+                <div class="col-sm-8">
+                    <button type="button" class="btn btn-primary cancel-btn">Cancel</button>
+                    <button type="button" [disabled]="evaluationForm.invalid" class="btn btn-primary cancel-btn">Save as
+                        Draft</button>
+                    <button type="submit" [disabled]="evaluationForm.invalid" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</p-card>
